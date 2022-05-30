@@ -9,12 +9,17 @@ import '../model/demo.dart';
 import '../third_party/syntax_highlight.dart';
 
 class ApiDetail extends StatefulWidget {
+  ValueNotifier useMaterial3;
   @override
   State<ApiDetail> createState() => _ApiDetailState();
   String name;
   late String path;
-  ApiDetail({Key? key, required this.name, this.path = 'assets/md/'})
-      : super(key: key);
+  ApiDetail({
+    Key? key,
+    required this.name,
+    this.path = 'assets/md/',
+    required this.useMaterial3,
+  }) : super(key: key);
 }
 
 class _ApiDetailState extends State<ApiDetail>
@@ -24,6 +29,15 @@ class _ApiDetailState extends State<ApiDetail>
   late Widget snap = Container();
   GlobalKey? lastKey;
 
+  @override
+  dispose() {
+    super.dispose();
+  }
+
+  updateView() {
+    setState(() {});
+  }
+
   _registerDemo(context) {
     registMaterial(context);
   }
@@ -32,8 +46,6 @@ class _ApiDetailState extends State<ApiDetail>
   void initState() {
     scrollCtrl = ScrollController();
     // _setRefBuild();
-    _registerDemo(context);
-    print("${widget.path}${widget.name}.md");
     rootBundle.load("${widget.path}${widget.name}.md").then(
       (bytes) {
         final buffer = bytes.buffer;
@@ -124,6 +136,7 @@ class _ApiDetailState extends State<ApiDetail>
 
   widgetsRowCodeBlockBuilder(name) {
     var names = name.toString().split(',');
+    debugPrint('$names');
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(names.length, (index) {
@@ -167,7 +180,7 @@ class _ApiDetailState extends State<ApiDetail>
   }
 
   Widget widgetCodeBlockBuilder(name) {
-    var demo = demos[name];
+    var demo = demos[name?.trim()];
     if (demo != null) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -199,8 +212,7 @@ class _ApiDetailState extends State<ApiDetail>
                 Border.fromBorderSide(BorderSide(color: Colors.grey.shade300)),
                 false,
               ),
-              code(
-                  '${demo.code.trim().startsWith('class') ? '' : '    '}${demo.code.trim()}'),
+              code(demo.code.trimRight()),
             ],
           ),
         ),
@@ -237,6 +249,8 @@ class _ApiDetailState extends State<ApiDetail>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    demos.clear();
+    _registerDemo(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),

@@ -4,12 +4,21 @@
 > 默认颜色为应用的主题色
 
 ```widgetsRow
-textButton
+textButton,    textButtonDisabled
+```
+```widgetsRow
+textButtonWithStyle  ,textButtonWithIcon
 ```
 
+<!-- 
 ## 自定义样式的文本按钮
 ```widgetsRow
 textButtonWithStyle
+``` -->
+
+## 渐变色
+```widget
+textButtonGradient
 ```
 
 
@@ -26,4 +35,3 @@ style | 定义按钮样式  | ButtonStyle?
 focusNode | 焦点  | void Function()?
 autofocus | 自动成为焦点  | void Function()?
 clipBehavior | 剪切习惯  | Clip | Clip.none | Clip.hardEdge, Clip.antiAliasWithSaveLayer, Clip.antiAlias, Clip.none 
-```

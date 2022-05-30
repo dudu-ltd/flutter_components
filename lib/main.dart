@@ -25,17 +25,19 @@ class FlutterComponents extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter组件们',
       theme: ThemeData(
+        // useMaterial3: true,
         fontFamily: 'PingFang',
         primarySwatch: Colors.blue,
       ),
-      home: AnimatedSplashScreen(
-        duration: 1000,
-        splash: const FlutterLogo(size: 400),
-        nextScreen: IndexPage(),
-        splashTransition: SplashTransition.fadeTransition,
-        // pageTransitionType: PageTransitionType.scale,
-        backgroundColor: Colors.white,
-      ),
+      home: IndexPage(),
+      // home: AnimatedSplashScreen(
+      //   duration: 1000,
+      //   splash: const FlutterLogo(size: 400),
+      //   nextScreen: IndexPage(),
+      //   splashTransition: SplashTransition.fadeTransition,
+      //   // pageTransitionType: PageTransitionType.scale,
+      //   backgroundColor: Colors.white,
+      // ),
     );
   }
 }

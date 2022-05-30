@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/demo/material/button/TextButton.demo.dart';
 
 import '../../model/demo.dart';
+import 'button/all.dart';
 
 registMaterialButton(BuildContext context) {
-  registTextButton(context);
+  registAllButton(context);
+  // registTextButton(context);
+  // registElevatedButton(context);
+  // registOutlinedButton(context);
+  // registIconButton(context);
 }

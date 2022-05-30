@@ -74,11 +74,19 @@ flutter:
     - assets/dart_syntax.json
     # doc
     #================= Material md ================
+    - assets/md/material/.md
     - assets/md/material/quick_start/about_this.md
     - assets/md/material/quick_start/about.md
     - assets/md/material/quick_start/all.md
-    - assets/md/material/basic/button/TextButton.md
+    # 按钮
     - assets/md/material/basic/button/all.md
+    - assets/md/material/basic/button/ElevatedButton.md
+    - assets/md/material/basic/button/FloatingActionButton.md
+    - assets/md/material/basic/button/IconButton.md
+    - assets/md/material/basic/button/MaterialButton.md
+    - assets/md/material/basic/button/OutlinedButton.md
+    - assets/md/material/basic/button/RawMaterialButton.md
+    - assets/md/material/basic/button/TextButton.md
     # display
     - assets/md/material/display/DataTable.md
     - assets/md/material/display/GridTile.md
@@ -96,6 +104,7 @@ flutter:
     - assets/md/material/navigation/PopupMenuButton.md
     - assets/md/material/navigation/Stepper.md
     # form
+    - assets/md/material/form.md
     - assets/md/material/form/Autocomplete.md
     - assets/md/material/form/Checkbox.md
     - assets/md/material/form/DateTime.md

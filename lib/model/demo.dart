@@ -8,6 +8,7 @@ class Demo {
   String code;
   String? title;
   Demo(this.name, this.widget, this.code, [this.title]) {
+    if (demos.containsKey(name)) throw Exception("重复注册 demo, 名称为：$name");
     demos[name] = this;
   }
 }

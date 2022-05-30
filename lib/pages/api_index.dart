@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_components/pages/header.dart';
 import 'package:flutter_components/widgets/container_layout.dart';
@@ -15,10 +16,22 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  late ValueNotifier<bool> useMaterial3;
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    useMaterial3.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
+    useMaterial3 = ValueNotifier<bool>(true);
+    useMaterial3.addListener(() {
+      setState(() {});
+    });
     tabController = TabController(
         length: 1,
         vsync: this,
@@ -34,7 +47,7 @@ class _IndexPageState extends State<IndexPage>
         controller: tabController,
         tabs: const [
           Tab(
-            text: 'Flutter Api',
+            text: 'Material Api',
           ),
         ],
       ),
@@ -48,9 +61,10 @@ class _IndexPageState extends State<IndexPage>
       controller: tabController,
       children: [
         ApiPage(
+          useMaterial3: useMaterial3,
           guideData: materialGuideData,
           path: 'assets/md/material',
-          initialRoute: '/form/DateTime',
+          initialRoute: '/basic/button/OutlinedButton',
         ),
       ],
     );
@@ -68,11 +82,22 @@ class _IndexPageState extends State<IndexPage>
           child: tabView,
           height: MediaQuery.of(context).size.height - 30,
         ),
-        bottomNavigationBar: SizedBox(
-            height: 30,
-            child: Center(
-                child: Text(
-                    'Copyright © 2022-present, Weicheng Ye     闽ICP备18020284号-1'))),
+        floatingActionButton: Tooltip(
+          message: '使用Material3风格',
+          child: Switch(
+            dragStartBehavior: DragStartBehavior.down,
+            value: useMaterial3.value,
+            onChanged: (value) => useMaterial3.value = value,
+          ),
+        ),
+        bottomNavigationBar: const SizedBox(
+          height: 30,
+          child: Center(
+            child: Text(
+              'Copyright © 2022-present, Weicheng Ye     闽ICP备18020284号-1',
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -112,7 +137,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'id': 'quick_start',
       'text': '快速开始',
       "children": [
-        // {"id": "all", "text": "组件总览"},
+        {"id": "all", "text": "组件总览"},
         {"id": "about", "text": "关于Flutter"},
         {"id": "about_this", "text": "关于本站"},
       ]
@@ -125,8 +150,14 @@ List<Map<String, dynamic>> get materialGuideData {
           "id": "button",
           "text": "按钮",
           "children": [
-            {"id": "all", "text": "概览"},
-            {"id": "TextButton", "text": "按钮"},
+            {"id": "all", "text": "按钮总览"},
+            {"id": "TextButton", "text": "文本按钮"},
+            {"id": "ElevatedButton", "text": "浮层按钮"},
+            {"id": "OutlinedButton", "text": "边框按钮"},
+            {"id": "IconButton", "text": "图标按钮"},
+            {"id": "MaterialButton", "text": "Material按钮"},
+            {"id": "RawMaterialButton", "text": "自带上下边距按钮"},
+            {"id": "FloatingActionButton", "text": "圆型按钮"},
           ]
         },
       ]
@@ -183,10 +214,12 @@ class ApiPage extends StatefulWidget {
   List<Map<String, dynamic>> guideData;
   String path;
   String initialRoute;
+  ValueNotifier<bool> useMaterial3;
   ApiPage({
     Key? key,
     required this.guideData,
     required this.initialRoute,
+    required this.useMaterial3,
     this.path = 'assets/md/',
   }) : super(key: key);
 
@@ -210,7 +243,6 @@ class _ApiPageState extends State<ApiPage> {
         );
       },
       onUnknownRoute: (val) {
-        debugPrint('$val');
         return null;
       },
       observers: <NavigatorObserver>[],
@@ -230,6 +262,7 @@ class _ApiPageState extends State<ApiPage> {
               return ApiDetail(
                 name: routeName,
                 path: widget.path,
+                useMaterial3: widget.useMaterial3,
               );
             });
   }
@@ -285,17 +318,6 @@ class _ApiPageState extends State<ApiPage> {
               children: children,
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Align(
-          //     alignment: Alignment.centerLeft,
-          //     child: Text(
-          //       node['text'],
-          //       style: theme.textTheme.titleLarge
-          //           ?.copyWith(fontWeight: FontWeight.bold),
-          //     ),
-          //   ),
-          // ),
         );
       } else {
         result.add(
@@ -304,10 +326,6 @@ class _ApiPageState extends State<ApiPage> {
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             onTap: () => to(node['text'], fileId(preId, node['id'])),
             title: Text(text, style: const TextStyle(fontSize: 14)),
-            // subtitle: Text(node['id']),
-            // trailing: (node['finish'] is bool && node['finish'])
-            //     ? Icon(Icons.check, color: CfgGlobal.successColor)
-            //     : null,
             selected: currentName == fileId(preId, node['id']),
           ),
         );
@@ -336,16 +354,21 @@ class _ApiPageState extends State<ApiPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 1360),
-        child: ContainerLayout(
-          main: createNav(),
-          leftJudge: true,
-          asideLeft: SingleChildScrollView(
-            child: guideNew,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        useMaterial3: widget.useMaterial3.value,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1360),
+          child: ContainerLayout(
+            main: createNav(),
+            leftJudge: true,
+            asideLeft: SingleChildScrollView(
+              child: guideNew,
+            ),
+            asideLeftWidth: 200,
           ),
-          asideLeftWidth: 200,
         ),
       ),
     );
