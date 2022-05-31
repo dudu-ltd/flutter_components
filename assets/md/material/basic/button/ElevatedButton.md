@@ -2,10 +2,10 @@
 
 
 ```widgetsRow
-elevatedButton,elevatedButtonDisabled
+elevatedButton(默认),elevatedButtonDisabled(禁用)
 ```
 ```widgetsRow
-elevatedButtonWithStyle,elevatedButtonWithIcon
+elevatedButtonWithStyle(修改颜色),elevatedButtonWithIcon(携带图标)
 ```
 
 

@@ -4,10 +4,10 @@
 > 默认颜色为应用的主题色
 
 ```widgetsRow
-textButton,    textButtonDisabled
+textButton(默认),    textButtonDisabled(禁用)
 ```
 ```widgetsRow
-textButtonWithStyle  ,textButtonWithIcon
+textButtonWithStyle(修改颜色)  ,textButtonWithIcon(携带图标)
 ```
 
 <!-- 

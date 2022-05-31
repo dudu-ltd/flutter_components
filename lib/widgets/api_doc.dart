@@ -136,7 +136,6 @@ class _ApiDetailState extends State<ApiDetail>
 
   widgetsRowCodeBlockBuilder(name) {
     var names = name.toString().split(',');
-    debugPrint('$names');
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(names.length, (index) {
@@ -179,8 +178,17 @@ class _ApiDetailState extends State<ApiDetail>
     );
   }
 
+  Map<String, String?> nameParser(String originText) {
+    var titleMatch = RegExp(r'\((\S+)\)').firstMatch(originText);
+    var title = titleMatch?.group(0);
+    var name = title == null ? originText : originText.replaceAll(title, '');
+    return {'name': name, 'title': titleMatch?.group(1)};
+  }
+
   Widget widgetCodeBlockBuilder(name) {
-    var demo = demos[name?.trim()];
+    Map<String, String?> nameAndTitle = nameParser(name);
+    var demo = demos[nameAndTitle['name']?.trim()];
+    String? title = nameAndTitle['title'] ?? demo?.title;
     if (demo != null) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -189,7 +197,7 @@ class _ApiDetailState extends State<ApiDetail>
             // mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (demo.title != null)
+              if (title != null)
                 ColoredBox(
                   color: Colors.black12,
                   child: Align(
@@ -198,7 +206,7 @@ class _ApiDetailState extends State<ApiDetail>
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 16.0),
                       child: SelectableText(
-                        demo.title!,
+                        title,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
