@@ -66,10 +66,6 @@ scrollbar
 ```
 
 ```widgetsRow
-reorderableList
-```
-
-```widgetsRow
 refreshIndicator
 ```
 <!-- 
@@ -139,10 +135,6 @@ flutterLogo
 
 ```widgetsRow
 flexibleSpaceBar
-```
-
-```widgetsRow
-expansionTile
 ```
 
 ```widgetsRow

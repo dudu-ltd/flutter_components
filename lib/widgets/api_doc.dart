@@ -179,7 +179,7 @@ class _ApiDetailState extends State<ApiDetail>
   }
 
   Map<String, String?> nameParser(String originText) {
-    var titleMatch = RegExp(r'\((\S+)\)').firstMatch(originText);
+    var titleMatch = RegExp(r'\((.*)\)').firstMatch(originText);
     var title = titleMatch?.group(0);
     var name = title == null ? originText : originText.replaceAll(title, '');
     return {'name': name, 'title': titleMatch?.group(1)};

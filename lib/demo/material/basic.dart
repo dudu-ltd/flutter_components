@@ -161,33 +161,51 @@ registMaterialWidgetBasic(context) {
     ''',
   );
 
+  var bottomNavigationBarCurrentIndex = 0;
   var bottomNavigationBar = Demo(
     'bottomNavigationBar',
-    BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.ac_unit),
-          label: 'AC',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.access_alarm),
-          label: 'Alarm',
-        ),
-      ],
-    ),
+    StatefulBuilder(builder: (context, setState) {
+      return BottomNavigationBar(
+        currentIndex: bottomNavigationBarCurrentIndex,
+        onTap: ((value) {
+          setState(() {
+            bottomNavigationBarCurrentIndex = value;
+          });
+        }),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.ac_unit),
+            label: 'AC',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_alarm),
+            label: 'Alarm',
+          ),
+        ],
+      );
+    }),
     r'''
-    BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.ac_unit),
-          label: 'AC',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.access_alarm),
-          label: 'Alarm',
-        ),
-      ],
-    ),
+    var bottomNavigationBarCurrentIndex = 0;
+    StatefulBuilder(builder: (context, setState) {
+      return BottomNavigationBar(
+        currentIndex: bottomNavigationBarCurrentIndex,
+        onTap: ((value) {
+          setState(() {
+            bottomNavigationBarCurrentIndex = value;
+          });
+        }),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.ac_unit),
+            label: 'AC',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_alarm),
+            label: 'Alarm',
+          ),
+        ],
+      );
+    }),
     ''',
   );
 
@@ -538,7 +556,7 @@ registMaterialWidgetBasic(context) {
           lastDate: DateTime(2030),
         ).then((v) => print(v));
       },
-      child: const Text('Show Date Picker'),
+      child: const Text('打开日期选择'),
     ),
     r'''
     ElevatedButton(
@@ -723,18 +741,28 @@ registMaterialWidgetBasic(context) {
   bool expanded = false;
   var expandIcon = Demo(
     'expandIcon',
-    ExpandIcon(
-      onPressed: (bool isExpanded) {
-        expanded = !expanded;
-      },
-    ),
+    StatefulBuilder(builder: (context, setState) {
+      return ExpandIcon(
+        isExpanded: expanded,
+        onPressed: (bool isExpanded) {
+          setState(() {
+            expanded = !expanded;
+          });
+        },
+      );
+    }),
     r'''
     bool expanded = false;
-    ExpandIcon(
-      onPressed: (bool isExpanded) {
-        expanded = !expanded;
-      },
-    ),
+    StatefulBuilder(builder: (context, setState) {
+      return ExpandIcon(
+        isExpanded: expanded,
+        onPressed: (bool isExpanded) {
+          setState(() {
+            expanded = !expanded;
+          });
+        },
+      );
+    }),
     ''',
   );
 
@@ -776,32 +804,6 @@ registMaterialWidgetBasic(context) {
         ),
       ],
     )
-    ''',
-  );
-
-  var expansionTile = Demo(
-    'expansionTile',
-    const ExpansionTile(
-      initiallyExpanded: true,
-      title: Text('Expanded'),
-      backgroundColor: Colors.red,
-      children: <Widget>[
-        ListTile(
-          title: Text('0'),
-        ),
-      ],
-    ),
-    r'''
-    const ExpansionTile(
-      initiallyExpanded: true,
-      title: Text('Expanded'),
-      backgroundColor: Colors.red,
-      children: <Widget>[
-        ListTile(
-          title: Text('0'),
-        ),
-      ],
-    ),
     ''',
   );
 
@@ -1004,40 +1006,52 @@ registMaterialWidgetBasic(context) {
     ''',
   );
 
-  const double elevation = 42.0;
+  var navigationBarSelectedIndex = 0;
   var navigationBar = Demo(
     'navigationBar',
-    NavigationBar(
-      elevation: elevation,
-      destinations: const <Widget>[
-        NavigationDestination(
-          icon: Icon(Icons.ac_unit),
-          label: 'AC',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.access_alarm),
-          label: 'Alarm',
-        ),
-      ],
-      onDestinationSelected: (int i) {},
-    ),
+    StatefulBuilder(builder: (context, setState) {
+      return NavigationBar(
+        selectedIndex: navigationBarSelectedIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.ac_unit),
+            label: 'AC',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.access_alarm),
+            label: 'Alarm',
+          ),
+        ],
+        onDestinationSelected: (int i) {
+          setState(() {
+            navigationBarSelectedIndex = i;
+          });
+        },
+      );
+    }),
     r'''
-    const double elevation = 42.0;
-
-    NavigationBar(
-      elevation: elevation,
-      destinations: const <Widget>[
-        NavigationDestination(
-          icon: Icon(Icons.ac_unit),
-          label: 'AC',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.access_alarm),
-          label: 'Alarm',
-        ),
-      ],
-      onDestinationSelected: (int i) {},
-    ),
+    var navigationBarSelectedIndex = 0;
+    StatefulBuilder(builder: (context, setState) {
+      return NavigationBar(
+        elevation: 42,
+        selectedIndex: navigationBarSelectedIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.ac_unit),
+            label: 'AC',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.access_alarm),
+            label: 'Alarm',
+          ),
+        ],
+        onDestinationSelected: (int i) {
+          setState(() {
+            navigationBarSelectedIndex = i;
+          });
+        },
+      );
+    }),
     ''',
   );
 
@@ -1479,68 +1493,6 @@ final List<Dessert> kDesserts = <Dessert>[
     ''',
   );
 
-  const List<String> originalListItems = <String>[
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4'
-  ];
-  const double itemHeight = 48.0;
-  late List<String> listItems;
-  listItems = originalListItems.toList();
-  var reorderableList = Demo(
-    'reorderableList',
-    SizedBox(
-      height: 280,
-      child: ReorderableListView(
-        onReorder: (int oldIndex, int newIndex) {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final String element = listItems.removeAt(oldIndex);
-          listItems.insert(newIndex, element);
-        },
-        children: listItems.map<Widget>((String listItem) {
-          return SizedBox(
-            key: Key(listItem),
-            height: itemHeight,
-            width: itemHeight,
-            child: Text(listItem),
-          );
-        }).toList(),
-      ),
-    ),
-    r'''
-    const List<String> originalListItems = <String>[
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4'
-    ];
-    const double itemHeight = 48.0;
-    late List<String> listItems;
-    listItems = originalListItems.toList();
-    
-    ReorderableListView(
-      onReorder: (int oldIndex, int newIndex) {
-        if (oldIndex < newIndex) {
-          newIndex -= 1;
-        }
-        final String element = listItems.removeAt(oldIndex);
-        listItems.insert(newIndex, element);
-      },
-      children: listItems.map<Widget>((String listItem) {
-        return SizedBox(
-          key: Key(listItem),
-          height: itemHeight,
-          width: itemHeight,
-          child: Text(listItem),
-        );
-      }).toList(),
-    ),
-    ''',
-  );
-
   var scrollbar = Demo(
     'scrollbar',
     SizedBox(
@@ -1842,7 +1794,7 @@ final List<Dessert> kDesserts = <Dessert>[
           initialTime: const TimeOfDay(hour: 7, minute: 0),
         ).then((v) => print(v));
       },
-      child: const Text('Show Picker'),
+      child: const Text('打开时间选择弹窗'),
     ),
     r'''
     ElevatedButton(

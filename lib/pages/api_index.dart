@@ -143,6 +143,13 @@ List<Map<String, dynamic>> get materialGuideData {
       ]
     },
     {
+      'id': 'layout',
+      'text': '布局',
+      "children": [
+        {"id": "show", "text": "功能性弹出层"},
+      ]
+    },
+    {
       'id': 'basic',
       'text': '基本使用',
       "children": [
@@ -170,6 +177,8 @@ List<Map<String, dynamic>> get materialGuideData {
         {"id": "GridTile", "text": "类公众号文章卡片元素"},
         {"id": "ListTile", "text": "列表元素"},
         {"id": "Progress", "text": "进度条"},
+        {"id": "ExpansionTile", "text": "可折叠面板"},
+        {"id": "ReorderableListView", "text": "可排序列表"},
         {"id": "UserAccountsDrawerHeader", "text": "用户账号信息"},
       ]
     },
