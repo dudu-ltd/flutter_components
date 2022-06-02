@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_components/demo/material/layout/show.demo.dart';
 
 import '../../../model/demo.dart';
 
@@ -23,9 +24,9 @@ registScaffold(BuildContext context) {
       // return Scaffold
       child: Scaffold(
         appBar: AppBar(
-          flexibleSpace: Text('appBar flexibleSpace'),
+          leading: Text('appBar leading'),
           bottom: PreferredSize(
-            preferredSize: Size.zero,
+            preferredSize: Size.fromHeight(20),
             child: Text('appBar bottom'),
           ),
           title: Text('appBar title'),
@@ -56,9 +57,9 @@ registScaffold(BuildContext context) {
       // return Scaffold
       child: Scaffold(
         appBar: AppBar(
-          flexibleSpace: Text('appBar flexibleSpace'),
+          leading: Text('appBar leading'),
           bottom: PreferredSize(
-            preferredSize: Size.zero,
+            preferredSize: Size.fromHeight(20),
             child: Text('appBar bottom'),
           ),
           title: Text('appBar title'),
@@ -183,6 +184,7 @@ registScaffold(BuildContext context) {
       ),
     ),
     r'''
+    GlobalKey iconKey = GlobalKey();
 
     SizedBox(
       height: 600,
@@ -272,6 +274,155 @@ registScaffold(BuildContext context) {
           child: Icon(Icons.add),
           onPressed: () {},
         ),
+      ),
+    ),
+    ''',
+    'Scaffold',
+  );
+  TabController topTabController = TabController(length: 2, vsync: TestVSync());
+  var baseBorder =
+      OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent));
+  var scaffoldMobileTopTab = Demo(
+    'scaffoldMobileTopTab',
+    SizedBox(
+      height: 600,
+      width: 370.8,
+      child: Navigator(
+        onGenerateRoute: (val) {
+          return PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  toolbarHeight: 40,
+                  backgroundColor: Colors.white,
+                  titleSpacing: 0,
+                  actions: [
+                    InkWell(
+                      onTap: () {
+                        showSearch(
+                          context: context,
+                          // [DemoSearchDelegate] 详见【功能性布局】[showSearch]
+                          delegate: DemoSearchDelegate(),
+                        ).then((value) {
+                          if (value == null) return;
+                          showDialog(
+                            useRootNavigator: false,
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              content: Text(value['name']),
+                            ),
+                          );
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.search,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                  title: SizedBox(
+                    height: 40,
+                    child: TabBar(
+                      labelStyle:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      unselectedLabelStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        textBaseline: TextBaseline.ideographic,
+                      ),
+                      labelColor: Theme.of(context).primaryColor,
+                      controller: topTabController,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      isScrollable: true,
+                      tabs: [
+                        Tab(child: Text('关注', textAlign: TextAlign.end)),
+                        Tab(child: Text('推荐', textAlign: TextAlign.end)),
+                      ],
+                    ),
+                  ),
+                ),
+                body: TabBarView(
+                  controller: topTabController,
+                  children: [
+                    Center(child: Text('关注')),
+                    Center(child: Text('推荐')),
+                  ],
+                ),
+              );
+            },
+            // transitionDuration: const Duration(milliseconds: 0),
+          );
+        },
+      ),
+    ),
+    r'''
+    TabController topTabController = TabController(length: 2, vsync: TestVSync());
+  
+    Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 40,
+        backgroundColor: Colors.white,
+        titleSpacing: 0,
+        actions: [
+          InkWell(
+            onTap: () {
+              showSearch(
+                context: context,
+                // [DemoSearchDelegate] 详见【功能性布局】[showSearch]
+                delegate: DemoSearchDelegate(),
+              ).then((value) {
+                if (value == null) return;
+                showDialog(
+                  useRootNavigator: false,
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: Text(value['name']),
+                  ),
+                );
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.search,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
+        ],
+        title: SizedBox(
+          height: 40,
+          child: TabBar(
+            labelStyle:
+                TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            unselectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+              textBaseline: TextBaseline.ideographic,
+            ),
+            labelColor: Theme.of(context).primaryColor,
+            controller: topTabController,
+            indicatorSize: TabBarIndicatorSize.label,
+            isScrollable: true,
+            tabs: [
+              Tab(child: Text('关注', textAlign: TextAlign.end)),
+              Tab(child: Text('推荐', textAlign: TextAlign.end)),
+            ],
+          ),
+        ),
+      ),
+      body: TabBarView(
+        controller: topTabController,
+        children: [
+          Center(child: Text('关注')),
+          Center(child: Text('推荐')),
+        ],
       ),
     ),
     ''',

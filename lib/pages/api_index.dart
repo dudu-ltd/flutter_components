@@ -28,7 +28,7 @@ class _IndexPageState extends State<IndexPage>
   @override
   void initState() {
     super.initState();
-    useMaterial3 = ValueNotifier<bool>(true);
+    useMaterial3 = ValueNotifier<bool>(false);
     useMaterial3.addListener(() {
       setState(() {});
     });

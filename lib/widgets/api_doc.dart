@@ -39,6 +39,7 @@ class _ApiDetailState extends State<ApiDetail>
   }
 
   _registerDemo(context) {
+    demos.clear();
     registMaterial(context);
   }
 
