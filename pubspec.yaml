@@ -83,6 +83,7 @@ flutter:
     - assets/md/material/quick_start/about.md
     - assets/md/material/quick_start/all.md
     # 布局
+    - assets/md/material/layout/Scaffold.md
     - assets/md/material/layout/show.md
 
     # 按钮

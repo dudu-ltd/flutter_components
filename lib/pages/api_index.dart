@@ -83,18 +83,22 @@ class _IndexPageState extends State<IndexPage>
           height: MediaQuery.of(context).size.height - 30,
         ),
         floatingActionButton: Tooltip(
-          message: '使用Material3风格',
-          child: Switch(
-            dragStartBehavior: DragStartBehavior.down,
-            value: useMaterial3.value,
-            onChanged: (value) => useMaterial3.value = value,
+          message: '使用 Material3 风格',
+          child: FloatingActionButton(
+            onPressed: () {
+              useMaterial3.value = !useMaterial3.value;
+            },
+            child: Text('M3'),
+            backgroundColor: useMaterial3.value
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).disabledColor,
           ),
         ),
         bottomNavigationBar: const SizedBox(
           height: 30,
           child: Center(
             child: Text(
-              'Copyright © 2022-present, Weicheng Ye     闽ICP备18020284号-1',
+              'Copyright © 2022-present, xxb & ye     闽ICP备18020284号-1',
             ),
           ),
         ),
@@ -132,6 +136,7 @@ class _IndexPageState extends State<IndexPage>
 }
 
 List<Map<String, dynamic>> get materialGuideData {
+  Axis.horizontal;
   return [
     {
       'id': 'quick_start',
@@ -146,6 +151,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'id': 'layout',
       'text': '布局',
       "children": [
+        {"id": "Scaffold", "text": "脚手架布局"},
         {"id": "show", "text": "功能性弹出层"},
       ]
     },

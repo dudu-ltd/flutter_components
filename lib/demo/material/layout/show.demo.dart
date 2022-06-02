@@ -328,8 +328,17 @@ ElevatedButton(
             itemBox.size;
         showMenu(
           context: context,
-          position: RelativeRect.fromRect(itemRect, itemRect),
-          items: [PopupMenuItem(child: Text('菜单项11'))],
+          position: RelativeRect.fromLTRB(
+            itemRect.left,
+            itemRect.top + itemRect.height,
+            itemRect.right,
+            itemRect.bottom,
+          ),
+          items: [
+            const PopupMenuItem(child: Text('菜单项1')),
+            const PopupMenuItem(child: Text('菜单项2')),
+            const PopupMenuItem(child: Text('菜单项3 菜单项3 菜单项3 菜单项3')),
+          ],
         );
       },
       child: Text('弹出菜单'),
