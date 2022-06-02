@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -12,6 +15,79 @@ class TestVSync implements TickerProvider {
 }
 
 registScaffold(BuildContext context) {
+  /// scaffoldWebBasic
+  var scaffoldWebBasic = Demo(
+    'scaffoldWebBasic',
+    ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 400),
+      // return Scaffold
+      child: Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Text('appBar flexibleSpace'),
+          bottom: PreferredSize(
+            preferredSize: Size.zero,
+            child: Text('appBar bottom'),
+          ),
+          title: Text('appBar title'),
+          actions: [Center(child: Text('appBar actions'))],
+          // 关闭返回按钮的显示
+          automaticallyImplyLeading: false,
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: const Text('floatingActionButton'),
+        ),
+        body: Center(child: Text('body')),
+        bottomSheet: Container(
+          alignment: Alignment.center,
+          height: 30,
+          child: Text('bottomSheet'),
+        ),
+        bottomNavigationBar: Container(
+          height: 30,
+          alignment: Alignment.center,
+          child: Text('bottomNavigationBar'),
+        ),
+      ),
+    ),
+    r'''
+    ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 400),
+      // return Scaffold
+      child: Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Text('appBar flexibleSpace'),
+          bottom: PreferredSize(
+            preferredSize: Size.zero,
+            child: Text('appBar bottom'),
+          ),
+          title: Text('appBar title'),
+          actions: [Center(child: Text('appBar actions'))],
+          // 关闭返回按钮的显示
+          automaticallyImplyLeading: false,
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          label: const Text('floatingActionButton'),
+        ),
+        body: Center(child: Text('body')),
+        bottomSheet: Container(
+          alignment: Alignment.center,
+          height: 30,
+          child: Text('bottomSheet'),
+        ),
+        bottomNavigationBar: Container(
+          height: 30,
+          alignment: Alignment.center,
+          child: Text('bottomNavigationBar'),
+        ),
+      ),
+    ),
+    ''',
+    'Scaffold',
+  );
+
+  /// scaffoldMobileTabFull
   TabController tabController = TabController(length: 2, vsync: TestVSync());
   GlobalKey iconKey = GlobalKey();
   var scaffoldMobileTabFull = Demo(
@@ -19,6 +95,7 @@ registScaffold(BuildContext context) {
     SizedBox(
       height: 600,
       width: 300,
+      // return Scaffold
       child: Scaffold(
         appBar: AppBar(
           title: const Text('头部'),
@@ -110,6 +187,7 @@ registScaffold(BuildContext context) {
     SizedBox(
       height: 600,
       width: 300,
+      // return Scaffold
       child: Scaffold(
         appBar: AppBar(
           title: const Text('头部'),
