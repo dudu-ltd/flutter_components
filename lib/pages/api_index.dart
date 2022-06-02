@@ -98,7 +98,7 @@ class _IndexPageState extends State<IndexPage>
           height: 30,
           child: Center(
             child: Text(
-              'Copyright © 2022-present, xxb & ye     闽ICP备18020284号-1',
+              'Copyright © 2022-present, Xu & Ye     闽ICP备18020284号-1',
             ),
           ),
         ),
