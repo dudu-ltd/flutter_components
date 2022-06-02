@@ -23,7 +23,7 @@ class ApiDetail extends StatefulWidget {
 }
 
 class _ApiDetailState extends State<ApiDetail>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
   Widget content = Container();
   late ScrollController scrollCtrl;
   late Widget snap = Container();
@@ -80,6 +80,10 @@ class _ApiDetailState extends State<ApiDetail>
         });
       },
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _registerDemo(context);
+    });
     super.initState();
   }
 
@@ -257,8 +261,6 @@ class _ApiDetailState extends State<ApiDetail>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    demos.clear();
-    _registerDemo(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),

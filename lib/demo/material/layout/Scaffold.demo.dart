@@ -14,8 +14,8 @@ class TestVSync implements TickerProvider {
 registScaffold(BuildContext context) {
   TabController tabController = TabController(length: 2, vsync: TestVSync());
   GlobalKey iconKey = GlobalKey();
-  var scaffold = Demo(
-    'scaffoldTabFull',
+  var scaffoldMobileTabFull = Demo(
+    'scaffoldMobileTabFull',
     SizedBox(
       height: 600,
       width: 300,
