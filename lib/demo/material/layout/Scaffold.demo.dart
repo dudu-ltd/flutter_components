@@ -279,6 +279,7 @@ registScaffold(BuildContext context) {
     ''',
     'Scaffold',
   );
+
   TabController topTabController = TabController(length: 2, vsync: TestVSync());
   var baseBorder =
       OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent));
@@ -362,6 +363,8 @@ registScaffold(BuildContext context) {
     ),
     r'''
     TabController topTabController = TabController(length: 2, vsync: TestVSync());
+    var baseBorder =
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent));
   
     Scaffold(
       appBar: AppBar(
@@ -410,6 +413,82 @@ registScaffold(BuildContext context) {
             controller: topTabController,
             indicatorSize: TabBarIndicatorSize.label,
             isScrollable: true,
+            tabs: [
+              Tab(child: Text('关注', textAlign: TextAlign.end)),
+              Tab(child: Text('推荐', textAlign: TextAlign.end)),
+            ],
+          ),
+        ),
+      ),
+      body: TabBarView(
+        controller: topTabController,
+        children: [
+          Center(child: Text('关注')),
+          Center(child: Text('推荐')),
+        ],
+      ),
+    ),
+    ''',
+    'Scaffold',
+  );
+
+  TabController topTab2Controller =
+      TabController(length: 2, vsync: TestVSync());
+  var scaffoldMobileTopTab2 = Demo(
+    'scaffoldMobileTopTab2',
+    SizedBox(
+      height: 600,
+      width: 370.8,
+      child: Navigator(
+        onGenerateRoute: (val) {
+          return PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  toolbarHeight: 40,
+                  titleSpacing: 0,
+                  title: SizedBox(
+                    height: 40,
+                    child: TabBar(
+                      controller: topTabController,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      tabs: [
+                        Tab(child: Text('关注', textAlign: TextAlign.end)),
+                        Tab(child: Text('推荐', textAlign: TextAlign.end)),
+                      ],
+                    ),
+                  ),
+                ),
+                body: TabBarView(
+                  controller: topTabController,
+                  children: [
+                    Center(child: Text('关注')),
+                    Center(child: Text('推荐')),
+                  ],
+                ),
+              );
+            },
+            // transitionDuration: const Duration(milliseconds: 0),
+          );
+        },
+      ),
+    ),
+    r'''
+    TabController topTabController2 = TabController(length: 2, vsync: TestVSync());
+
+    Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 40,
+        backgroundColor: Colors.white,
+        titleSpacing: 0,
+        title: SizedBox(
+          height: 40,
+          child: TabBar(
+            controller: topTabController,
+            indicatorSize: TabBarIndicatorSize.label,
             tabs: [
               Tab(child: Text('关注', textAlign: TextAlign.end)),
               Tab(child: Text('推荐', textAlign: TextAlign.end)),

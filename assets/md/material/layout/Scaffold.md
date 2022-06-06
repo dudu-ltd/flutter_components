@@ -13,4 +13,7 @@ scaffoldMobileTabFull
 ```widget
 scaffoldMobileTopTab
 ```
-## 顶部导航布局1
+## 顶部导航布局2
+```widget
+scaffoldMobileTopTab2
+```
