@@ -137,9 +137,6 @@ flutterLogo
 flexibleSpaceBar
 ```
 
-```widgetsRow
-expansionPanelList
-```
 
 ```widgetsRow
 expandIcon

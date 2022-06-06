@@ -3,3 +3,7 @@
 ```widgetsRow
 expansionTile
 ```
+
+```widgetsRow
+expansionPanelList
+```

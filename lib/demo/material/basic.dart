@@ -766,47 +766,6 @@ registMaterialWidgetBasic(context) {
     ''',
   );
 
-  late int capturedIndex;
-  late bool capturedIsExpanded;
-  var expansionPanelList = Demo(
-    'expansionPanelList',
-    ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        capturedIndex = index;
-        capturedIsExpanded = isExpanded;
-      },
-      children: <ExpansionPanel>[
-        ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return Text(isExpanded ? 'B' : 'A');
-          },
-          body: const SizedBox(height: 100.0),
-          isExpanded: true, // this is the addition
-        ),
-      ],
-    ),
-    r'''
-    late int capturedIndex;
-    late bool capturedIsExpanded;
-
-    ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        capturedIndex = index;
-        capturedIsExpanded = isExpanded;
-      },
-      children: <ExpansionPanel>[
-        ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return Text(isExpanded ? 'B' : 'A');
-          },
-          body: const SizedBox(height: 100.0),
-          isExpanded: true, // this is the addition
-        ),
-      ],
-    )
-    ''',
-  );
-
   // var flexibleSpaceBar = Demo(
   //   'flexibleSpaceBar',
   //   FlexibleSpaceBar(

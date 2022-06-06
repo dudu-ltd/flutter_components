@@ -27,4 +27,67 @@ registExpansionTile(BuildContext context) {
     ),
     ''',
   );
+
+  List<bool> capturedIsExpandeds = [false, false];
+  var expansionPanelList = Demo(
+    'expansionPanelList',
+    StatefulBuilder(
+      builder: (context, setState) {
+        return ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              capturedIsExpandeds[index] = !isExpanded;
+            });
+          },
+          children: <ExpansionPanel>[
+            ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return Text(isExpanded ? 'B' : 'A');
+              },
+              body: const SizedBox(height: 100.0),
+              isExpanded: capturedIsExpandeds[0],
+            ),
+            ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return Text(isExpanded ? 'D' : 'C');
+              },
+              body: const SizedBox(height: 100.0),
+              isExpanded: capturedIsExpandeds[1],
+            ),
+          ],
+        );
+      },
+    ),
+    r'''
+    List<bool> capturedIsExpandeds = [false, false];
+
+    StatefulBuilder(
+      builder: (context, setState) {
+        return ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded) {
+            setState(() {
+              capturedIsExpandeds[index] = !isExpanded;
+            });
+          },
+          children: <ExpansionPanel>[
+            ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return Text(isExpanded ? 'B' : 'A');
+              },
+              body: const SizedBox(height: 100.0),
+              isExpanded: capturedIsExpandeds[0],
+            ),
+            ExpansionPanel(
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return Text(isExpanded ? 'D' : 'C');
+              },
+              body: const SizedBox(height: 100.0),
+              isExpanded: capturedIsExpandeds[1],
+            ),
+          ],
+        );
+      },
+    ),
+    ''',
+  );
 }
