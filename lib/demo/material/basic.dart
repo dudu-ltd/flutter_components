@@ -1327,27 +1327,80 @@ final List<Dessert> kDesserts = <Dessert>[
     ''',
   );
 
-  var radioValue = false;
+  String? radioValue = '烧烤';
   var radio = Demo(
     'radio',
-    StatefulBuilder(builder: (context, setState) {
-      return Radio<bool>(
-        value: true,
-        groupValue: radioValue,
-        onChanged: (v) {
-          setState(() => radioValue = !radioValue);
-        },
-      );
-    }),
+    Column(children: [
+      Row(children: [
+        StatefulBuilder(builder: (context, setState) { 
+          return Row(children: [
+            SizedBox(
+              width: 80,
+              child: Row(children: [
+                Radio<String>(
+                  value: '烧烤',
+                  groupValue: radioValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      radioValue = value;
+                    });
+                  },
+                ),
+                Text('烧烤')
+              ])),
+            SizedBox(
+              width: 80,
+              child: Row(children: [
+                Radio<String>(
+                  value: '火锅',
+                  groupValue: radioValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      radioValue = value;
+                    });
+                  },
+                ),
+                Text('火锅')
+              ])),
+            Text("今天吃啥: $radioValue")
+          ]);
+        }),
+      ]),
+      
+    ]),
     r'''
-    StatefulBuilder(builder: (context, setState) {
-      return Radio<int>(
-        value: radioValue,
-        groupValue: 2,
-        onChanged: (v) {
-          setState(() => radioValue == 1 ? 2 : 1);
-        },
-      );
+    StatefulBuilder(builder: (context, setState) { 
+      return Row(children: [
+        SizedBox(
+          width: 80,
+          child: Row(children: [
+            Radio<String>(
+              value: '烧烤',
+              groupValue: radioValue,
+              onChanged: (String? value) {
+                setState(() {
+                  radioValue = value;
+                });
+              },
+            ),
+            Text('烧烤')
+          ])),
+        SizedBox(
+          width: 80,
+          child: Row(children: [
+            Radio<String>(
+              value: '火锅',
+              groupValue: radioValue,
+              onChanged: (String? value) {
+                setState(() {
+                  radioValue = value;
+                });
+              },
+            ),
+            Text('火锅')
+          ])),
+        Text("今天吃啥: $radioValue")
+      ]);
     }),
     ''',
   );
