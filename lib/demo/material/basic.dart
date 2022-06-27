@@ -1106,59 +1106,98 @@ registMaterialWidgetBasic(context) {
   // );
 
   var rowsPerPageValue = 2;
-  final TestDataSource source = TestDataSource();
+  var allowSelection = true;
+  final TestDataSource source = TestDataSource(allowSelection);
+  var selectedText = '';
   var paginatedDataTable = Demo(
     'paginatedDataTable',
     StatefulBuilder(builder: (context, setState) {
-      return PaginatedDataTable(
-        header: const Text('Test table'),
-        source: source,
-        rowsPerPage: rowsPerPageValue,
-        showFirstLastButtons: true,
-        availableRowsPerPage: const <int>[2, 4, 8, 16],
-        onRowsPerPageChanged: (int? rowsPerPage) {
-          setState(() => rowsPerPageValue = rowsPerPage!);
-        },
-        onPageChanged: (int rowIndex) {
-          // log.add('page-changed: $rowIndex');
-        },
-        columns: const <DataColumn>[
-          DataColumn(label: Text('Name')),
-          DataColumn(label: Text('Calories'), numeric: true),
-          DataColumn(label: Text('Generation')),
-        ],
-      );
+      viewUpdate() {
+        setState(() {
+          var arr = [];
+          source._selectedRows.forEach((index) {
+            Dessert model = source.getDessert(index);
+            arr.add(model.name);
+          });
+          selectedText = arr.join(',');
+        });
+      }
+      source.addListener(viewUpdate);
+      return Column(children: [
+        PaginatedDataTable(
+          // header: const Text('Test table'),
+          source: source,
+          rowsPerPage: rowsPerPageValue,
+          showFirstLastButtons: true,
+          availableRowsPerPage: const <int>[2, 4, 8, 16],
+          showCheckboxColumn: true,
+          onRowsPerPageChanged: (int? rowsPerPage) {
+            setState(() {
+              rowsPerPageValue = rowsPerPage!;
+            });
+          },
+          onPageChanged: (int rowIndex) {
+            // log.add('page-changed: $rowIndex');
+          },
+          columns: const <DataColumn>[
+            DataColumn(label: Text('Name')),
+            DataColumn(label: Text('Calories'), numeric: true),
+            DataColumn(label: Text('Generation')),
+          ],
+        ),
+        Text('选中：${selectedText}')
+      ]);
     }),
     r'''
     var rowsPerPageValue = 2;
-    final TestDataSource source = TestDataSource();
-
-    StatefulBuilder(builder: (context, setState) {
-      return PaginatedDataTable(
-        header: const Text('Test table'),
-        source: source,
-        rowsPerPage: rowsPerPageValue,
-        showFirstLastButtons: true,
-        availableRowsPerPage: const <int>[2, 4, 8, 16],
-        onRowsPerPageChanged: (int? rowsPerPage) {
-          setState(() => rowsPerPageValue = rowsPerPage!);
-        },
-        onPageChanged: (int rowIndex) {},
-        columns: const <DataColumn>[
-          DataColumn(label: Text('Name')),
-          DataColumn(label: Text('Calories'), numeric: true),
-          DataColumn(label: Text('Generation')),
-        ],
-      );
-    })
+    var allowSelection = true;
+    final TestDataSource source = TestDataSource(allowSelection);
+    var selectedText = '';
+    var paginatedDataTable = Demo(
+      'paginatedDataTable',
+      StatefulBuilder(builder: (context, setState) {
+        viewUpdate() {
+          setState(() {
+            var arr = [];
+            source._selectedRows.forEach((index) {
+              Dessert model = source.getDessert(index);
+              arr.add(model.name);
+            });
+            selectedText = arr.join(',');
+          });
+        }
+        source.addListener(viewUpdate);
+        return Column(children: [
+          PaginatedDataTable(
+            // header: const Text('Test table'),
+            source: source,
+            rowsPerPage: rowsPerPageValue,
+            showFirstLastButtons: true,
+            availableRowsPerPage: const <int>[2, 4, 8, 16],
+            showCheckboxColumn: true,
+            onRowsPerPageChanged: (int? rowsPerPage) {
+              setState(() {
+                rowsPerPageValue = rowsPerPage!;
+              });
+            },
+            onPageChanged: (int rowIndex) {
+              // log.add('page-changed: $rowIndex');
+            },
+            columns: const <DataColumn>[
+              DataColumn(label: Text('Name')),
+              DataColumn(label: Text('Calories'), numeric: true),
+              DataColumn(label: Text('Generation')),
+            ],
+          ),
+          Text('选中：${selectedText}')
+        ]);
+      })
 
 
 class TestDataSource extends DataTableSource {
-  TestDataSource({
-    this.allowSelection = false,
-  });
+  TestDataSource(this.allowSelection);
 
-  final bool allowSelection;
+  bool allowSelection;
 
   int get generation => _generation;
   int _generation = 0;
@@ -1205,6 +1244,10 @@ class TestDataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => _selectedRows.length;
+  
+  Dessert getDessert(int index) {
+    return kDesserts[index % kDesserts.length];
+  }
 }
 
 class Dessert {
@@ -2006,11 +2049,9 @@ final List<Dessert> kDesserts = <Dessert>[
 }
 
 class TestDataSource extends DataTableSource {
-  TestDataSource({
-    this.allowSelection = false,
-  });
+  TestDataSource(this.allowSelection);
 
-  final bool allowSelection;
+  bool allowSelection;
 
   int get generation => _generation;
   int _generation = 0;
@@ -2057,6 +2098,10 @@ class TestDataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => _selectedRows.length;
+  
+  Dessert getDessert(int index) {
+    return kDesserts[index % kDesserts.length];
+  }
 }
 
 class Dessert {
