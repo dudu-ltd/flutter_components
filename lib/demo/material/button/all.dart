@@ -640,4 +640,58 @@ ElevatedButton(
     ''',
     'OutlinedButton',
   );
+  var outlinedButtonWithIcon1 = Demo(
+    'outlinedButtonWithIcon1',
+    OutlinedButton(
+      onPressed: () {},
+      child: SizedBox(
+        child: Row(
+          children: [
+            Text('按钮'),
+            Icon(Icons.edit)
+          ],
+        ),
+        width: 60,
+      ),
+    ),
+    r'''
+    OutlinedButton(
+      onPressed: () {},
+      child: SizedBox(
+        child: Row(
+          children: [
+            Text('按钮'),
+            Icon(Icons.edit)
+          ],
+        ),
+        width: 60,
+      ),
+    ),
+    ''',
+    'OutlinedButton',
+  );
+  var outlinedButtonWithIcon2 = Demo(
+    'outlinedButtonWithIcon2',
+    OutlinedButton(
+      onPressed: () {},
+      child: Column(
+          children: [
+            Icon(Icons.edit),
+            Text('按钮')
+          ]
+      ),
+    ),
+    r'''
+    OutlinedButton(
+      onPressed: () {},
+      child: Column(
+          children: [
+            Icon(Icons.edit),
+            Text('按钮')
+          ]
+      ),
+    ),
+    ''',
+    'OutlinedButton',
+  );
 }
