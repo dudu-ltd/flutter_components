@@ -98,7 +98,7 @@ class _IndexPageState extends State<IndexPage>
           height: 30,
           child: Center(
             child: Text(
-              'Copyright © 2022-present, Xu & Ye     闽ICP备18020284号-1',
+              'Copyright © 2022-present, 笃笃科技    闽ICP备2022010380号-1',
             ),
           ),
         ),
@@ -142,7 +142,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'id': 'quick_start',
       'text': '快速开始',
       "children": [
-        {"id": "all", "text": "组件总览"},
+        // {"id": "all", "text": "组件总览"},
         {"id": "about", "text": "关于Flutter"},
         {"id": "about_this", "text": "关于本站"},
       ]

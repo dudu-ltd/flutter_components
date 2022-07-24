@@ -6,3 +6,6 @@
 - 第三方包仓库：[pub.dev](https://pub.flutter-io.cn/)
 - GitHub：[flutter / flutter](https://github.com/flutter/flutter)
 - Gitee：[Gitee 极速下载 / Flutter](https://gitee.com/mirrors/Flutter)
+
+## 交流群
+QQ群：702522120
