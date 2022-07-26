@@ -13,6 +13,6 @@ import 'package:flutter_components/main.dart';
 void main() {
   testWidgets('FlutterComponents index test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const FlutterComponents());
+    await tester.pumpWidget(FlutterComponents());
   });
 }

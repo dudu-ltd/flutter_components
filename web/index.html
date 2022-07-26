@@ -21,7 +21,6 @@
   <meta name="keywords" content="flutter,api,demo,material,dart,sdk,flutter3">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,7 +41,38 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
+<style>
+  html, body {
+    padding: 0;
+    margin: 0;
+  }
+  /* Loading 效果
+  版权声明：本文为CSDN博主「yaLemonit」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+  原文链接：https://blog.csdn.net/m0_57877734/article/details/122221127
+ */
+  .loading__anim {  
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        border: 5px solid rgba(189,189,189 ,0.25);
+        border-left-color: rgba(3,155,229 ,1);
+        border-top-color: rgba(3,155,229 ,1);
+        border-radius: 50%;
+        animation: rotate 600ms infinite linear;
+    }
+ 
+    @keyframes rotate {
+        to {  transform: rotate(1turn) }
+    }
+</style>
 <body>
+
+  <div style="position: absolute; left: 50%; top: 40%; transform: translate(-50%,-50%);">
+    <div class="loading__anim"></div>
+  </div>
+  <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);">
+    <span>Flutter资源加载耗时较长，请耐心等待...</span>
+  </div>
   <script type='text/javascript'>
     !function (e, t, n, g, i) { e[i] = e[i] || function () { (e[i].q = e[i].q || []).push(arguments) }, n = t.createElement("script"), tag = t.getElementsByTagName("script")[0], n.async = 1, n.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + g, tag.parentNode.insertBefore(n, tag) }(window, document, "script", "assets.giocdn.com/2.1/gio.js", "gio");
     gio('init', 'bfb13ed9ca35e4dc', {});
@@ -63,7 +93,10 @@
           serviceWorkerVersion: serviceWorkerVersion,
         }
       }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
+        return engineInitializer.initializeEngine()
+          .catch(function() {
+            console.error(arguments)
+          });
       }).then(function(appRunner) {
         return appRunner.runApp();
       });

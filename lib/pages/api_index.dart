@@ -1,14 +1,25 @@
+// Copyright 2022-present Project Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'dart:async';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_components/pages/header.dart';
 import 'package:flutter_components/widgets/container_layout.dart';
+import 'package:go_router/go_router.dart';
 
-import '../model/demo.dart';
 import '../widgets/api_doc.dart';
 
 class IndexPage extends StatefulWidget {
-  const IndexPage({Key? key}) : super(key: key);
+  late String pkg;
+  String? path;
+  IndexPage({String? pkg, this.path, super.key}) {
+    if (pkg == null) {
+      this.pkg = 'material';
+    } else {
+      this.pkg = pkg;
+    }
+  }
   @override
   State<IndexPage> createState() => _IndexPageState();
 }
@@ -33,10 +44,11 @@ class _IndexPageState extends State<IndexPage>
       setState(() {});
     });
     tabController = TabController(
-        length: 1,
-        vsync: this,
-        initialIndex: 0,
-        animationDuration: Duration.zero);
+      length: 1,
+      vsync: this,
+      initialIndex: 0,
+      animationDuration: Duration.zero,
+    );
   }
 
   Widget get tabBars {
@@ -63,8 +75,8 @@ class _IndexPageState extends State<IndexPage>
         ApiPage(
           useMaterial3: useMaterial3,
           guideData: materialGuideData,
-          path: 'assets/md/material',
-          initialRoute: '/basic/button/OutlinedButton',
+          path: 'assets/md/${widget.pkg}',
+          initialRoute: widget.path ?? '/basic/button/OutlinedButton',
         ),
       ],
     );
@@ -74,6 +86,9 @@ class _IndexPageState extends State<IndexPage>
         return <Widget>[
           SliverAppBar(
             title: Header(child: tabBars),
+            actions: [
+              if (Navigator.of(context).canPop()) const SizedBox(width: 56),
+            ],
           ),
         ];
       },
@@ -105,34 +120,6 @@ class _IndexPageState extends State<IndexPage>
       ),
     );
   }
-
-  ScrollController get innerController {
-    return globalKey.currentState!.innerController;
-  }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   var tabView = TabBarView(
-  //     controller: tabController,
-  //     children: [
-  //       ApiPage(
-  //         guideData: materialGuideData,
-  //         path: 'assets/md/material',
-  //         initialRoute: '/form/DateTime',
-  //       ),
-  //     ],
-  //   );
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: Header(child: tabBars),
-  //     ),
-  //     body: SizedBox(
-  //       child: tabView,
-  //       height: MediaQuery.of(context).size.height - 60,
-  //     ),
-  //   );
-  // }
-
 }
 
 List<Map<String, dynamic>> get materialGuideData {
@@ -142,7 +129,6 @@ List<Map<String, dynamic>> get materialGuideData {
       'id': 'quick_start',
       'text': '快速开始',
       "children": [
-        // {"id": "all", "text": "组件总览"},
         {"id": "about", "text": "关于Flutter"},
         {"id": "about_this", "text": "关于本站"},
       ]
@@ -240,60 +226,27 @@ class ApiPage extends StatefulWidget {
 
   @override
   State<ApiPage> createState() => _ApiPageState();
+
+  String get pkg {
+    return path.split('/').last;
+  }
 }
 
 class _ApiPageState extends State<ApiPage> {
   BuildContext? navContext;
   Map<String, RoutePageBuilder> cache = {};
 
-  Navigator createNav() {
-    return Navigator(
-      // Navigator
-      initialRoute: widget.initialRoute,
-      onGenerateRoute: (val) {
-        RoutePageBuilder builder = getNext(val.name!);
-        return PageRouteBuilder(
-          pageBuilder: builder,
-          // transitionDuration: const Duration(milliseconds: 0),
-        );
-      },
-      onUnknownRoute: (val) {
-        return null;
-      },
-      observers: <NavigatorObserver>[],
-    );
-  }
-
-  var guideContext = null;
-  var guideSetState = null;
   var currentName = null;
-
-  RoutePageBuilder getNext(String routeName) {
-    return cache.putIfAbsent(
-        routeName,
-        () => (BuildContext nContext, Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              navContext = nContext;
-              return ApiDetail(
-                name: routeName,
-                path: widget.path,
-                useMaterial3: widget.useMaterial3,
-              );
-            });
-  }
 
   Widget get guideNew {
     var theme = Theme.of(context);
-    return StatefulBuilder(builder: (context, setState) {
-      guideContext = context;
-      guideSetState = setState;
-      return Material(
-        color: Colors.white,
-        child: Column(children: [
-          ...guideDataToWidget(widget.guideData),
-        ]),
-      );
-    });
+    return Material(
+      color: Colors.white,
+      child: Column(children: [
+        ...guideDataToWidget(widget.guideData),
+      ]),
+    );
+    // });
   }
 
   TextStyle navTextStyle(int i) {
@@ -339,9 +292,11 @@ class _ApiPageState extends State<ApiPage> {
           ListTile(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-            onTap: () => to(node['text'], fileId(preId, node['id'])),
+            onTap: () {
+              to(node['text'], fileId(preId, node['id']));
+            },
             title: Text(text, style: const TextStyle(fontSize: 14)),
-            selected: currentName == fileId(preId, node['id']),
+            selected: widget.initialRoute == fileId(preId, node['id']),
           ),
         );
       }
@@ -356,15 +311,13 @@ class _ApiPageState extends State<ApiPage> {
   to(String name, String id) {
     if (currentName == id) return;
     currentName = id;
-    // if (isPc) (appWindow.title = name);
-    if (navContext != null) {
-      // 150ms 避免切换路由时，按钮的水波纹卡顿，造成程序卡顿的视觉效果。部分延迟感官上显得更流畅。
-      Timer(Duration(milliseconds: 150), () {
-        // Navigator.maybePop(navContext!);
-        Navigator.pushNamed(navContext!, id);
-      });
-      guideSetState?.call(() {});
-    }
+    Timer(Duration(milliseconds: 150), () {
+      context.pushNamed(
+        'indexPage',
+        params: {'pkg': widget.pkg},
+        queryParams: {'path': id},
+      );
+    });
   }
 
   @override
@@ -377,9 +330,17 @@ class _ApiPageState extends State<ApiPage> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1360),
           child: ContainerLayout(
-            main: createNav(),
+            main: SingleChildScrollView(
+              controller: ScrollController(),
+              child: ApiDetail(
+                name: widget.initialRoute,
+                path: widget.path,
+                useMaterial3: widget.useMaterial3,
+              ),
+            ),
             leftJudge: true,
             asideLeft: SingleChildScrollView(
+              controller: ScrollController(),
               child: guideNew,
             ),
             asideLeftWidth: 200,

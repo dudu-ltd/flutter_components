@@ -1,0 +1,1 @@
+flutter build web --dart-define=FLUTTER_WEB_USE_SKIA=true --no-sound-null-safety --web-renderer=html

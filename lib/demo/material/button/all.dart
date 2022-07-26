@@ -1,5 +1,8 @@
+// Copyright 2022-present Project Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../../../model/demo.dart';
 
@@ -646,10 +649,7 @@ ElevatedButton(
       onPressed: () {},
       child: SizedBox(
         child: Row(
-          children: [
-            Text('按钮'),
-            Icon(Icons.edit)
-          ],
+          children: [Text('按钮'), Icon(Icons.edit)],
         ),
         width: 60,
       ),
@@ -674,12 +674,7 @@ ElevatedButton(
     'outlinedButtonWithIcon2',
     OutlinedButton(
       onPressed: () {},
-      child: Column(
-          children: [
-            Icon(Icons.edit),
-            Text('按钮')
-          ]
-      ),
+      child: Column(children: [Icon(Icons.edit), Text('按钮')]),
     ),
     r'''
     OutlinedButton(

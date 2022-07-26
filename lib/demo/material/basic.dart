@@ -1,3 +1,7 @@
+// Copyright 2022-present Project Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -1122,6 +1126,7 @@ registMaterialWidgetBasic(context) {
           selectedText = arr.join(',');
         });
       }
+
       source.addListener(viewUpdate);
       return Column(children: [
         PaginatedDataTable(
@@ -1375,41 +1380,40 @@ final List<Dessert> kDesserts = <Dessert>[
     'radio',
     Column(children: [
       Row(children: [
-        StatefulBuilder(builder: (context, setState) { 
+        StatefulBuilder(builder: (context, setState) {
           return Row(children: [
             SizedBox(
-              width: 80,
-              child: Row(children: [
-                Radio<String>(
-                  value: '烧烤',
-                  groupValue: radioValue,
-                  onChanged: (String? value) {
-                    setState(() {
-                      radioValue = value;
-                    });
-                  },
-                ),
-                Text('烧烤')
-              ])),
+                width: 80,
+                child: Row(children: [
+                  Radio<String>(
+                    value: '烧烤',
+                    groupValue: radioValue,
+                    onChanged: (String? value) {
+                      setState(() {
+                        radioValue = value;
+                      });
+                    },
+                  ),
+                  Text('烧烤')
+                ])),
             SizedBox(
-              width: 80,
-              child: Row(children: [
-                Radio<String>(
-                  value: '火锅',
-                  groupValue: radioValue,
-                  onChanged: (String? value) {
-                    setState(() {
-                      radioValue = value;
-                    });
-                  },
-                ),
-                Text('火锅')
-              ])),
+                width: 80,
+                child: Row(children: [
+                  Radio<String>(
+                    value: '火锅',
+                    groupValue: radioValue,
+                    onChanged: (String? value) {
+                      setState(() {
+                        radioValue = value;
+                      });
+                    },
+                  ),
+                  Text('火锅')
+                ])),
             Text("今天吃啥: $radioValue")
           ]);
         }),
       ]),
-      
     ]),
     r'''
     StatefulBuilder(builder: (context, setState) { 
@@ -2098,7 +2102,7 @@ class TestDataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => _selectedRows.length;
-  
+
   Dessert getDessert(int index) {
     return kDesserts[index % kDesserts.length];
   }
