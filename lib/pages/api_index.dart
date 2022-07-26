@@ -76,7 +76,7 @@ class _IndexPageState extends State<IndexPage>
           useMaterial3: useMaterial3,
           guideData: materialGuideData,
           path: 'assets/md/${widget.pkg}',
-          initialRoute: widget.path ?? '/basic/button/OutlinedButton',
+          initialRoute: widget.path ?? '/quick_start/about',
         ),
       ],
     );
