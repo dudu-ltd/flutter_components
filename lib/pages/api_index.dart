@@ -113,7 +113,7 @@ class _IndexPageState extends State<IndexPage>
           height: 30,
           child: Center(
             child: Text(
-              'Copyright © 2022-present, 笃笃科技    闽ICP备2022010380号-1',
+              'Copyright © 2022-present, 闽ICP备2022010380号-1',
             ),
           ),
         ),
@@ -180,7 +180,6 @@ List<Map<String, dynamic>> get materialGuideData {
       "children": [
         {"id": "NavigationBar", "text": "导航栏"},
         {"id": "NavigationRail", "text": "侧边导航"},
-        {"id": "PlatformMenuBar", "text": "菜单"},
         {"id": "PopupMenuButton", "text": "弹出菜单"},
         {"id": "Stepper", "text": "步骤条"},
         {"id": "Tabs", "text": "标签页"},
@@ -232,21 +231,60 @@ class ApiPage extends StatefulWidget {
   }
 }
 
-class _ApiPageState extends State<ApiPage> {
+class _ApiPageState extends State<ApiPage> with SingleTickerProviderStateMixin {
   BuildContext? navContext;
   Map<String, RoutePageBuilder> cache = {};
+  late AnimationController menuCtrl;
+  late Animation<double> menuWidth;
+  late bool menuShow = true;
+  late bool isVertial;
 
-  var currentName = null;
+  @override
+  void initState() {
+    menuCtrl =
+        AnimationController(duration: Duration(milliseconds: 300), vsync: this);
+    menuWidth = Tween(begin: 200.0, end: 40.0).animate(menuCtrl)
+      ..addListener(() {
+        menuShow = menuWidth.value == 200.0;
+        setState(() {});
+      });
+    super.initState();
+  }
 
   Widget get guideNew {
-    var theme = Theme.of(context);
     return Material(
       color: Colors.white,
       child: Column(children: [
-        ...guideDataToWidget(widget.guideData),
+        if (menuShow) ...guideDataToWidget(widget.guideData),
       ]),
     );
-    // });
+  }
+
+  Widget get drawerTrigger {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 80),
+      child: FloatingActionButton(
+        isExtended: true,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => Align(
+              alignment: Alignment.centerLeft,
+              child: FractionallySizedBox(
+                widthFactor: .618,
+                child: Drawer(
+                  child: ColoredBox(
+                    color: Colors.white,
+                    child: menu,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.menu),
+      ),
+    );
   }
 
   TextStyle navTextStyle(int i) {
@@ -309,44 +347,58 @@ class _ApiPageState extends State<ApiPage> {
   }
 
   to(String name, String id) {
-    if (currentName == id) return;
-    currentName = id;
-    Timer(Duration(milliseconds: 150), () {
-      context.pushNamed(
-        'indexPage',
-        params: {'pkg': widget.pkg},
-        queryParams: {'path': id},
-      );
-    });
+    if (widget.initialRoute == id) return;
+
+    context.pushNamed(
+      'indexPage',
+      params: {'pkg': widget.pkg},
+      queryParams: {'path': id},
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        useMaterial3: widget.useMaterial3.value,
+    Size size = MediaQuery.of(context).size;
+    isVertial = size.height > size.width;
+    return Scaffold(
+      floatingActionButton: isVertial ? drawerTrigger : null,
+      drawer: const FractionallySizedBox(
+        widthFactor: .618,
+        child: ColoredBox(
+          color: Colors.white,
+          child: Center(child: Text('侧边抽屉')),
+        ),
       ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1360),
-          child: ContainerLayout(
-            main: SingleChildScrollView(
-              controller: ScrollController(),
-              child: ApiDetail(
-                name: widget.initialRoute,
-                path: widget.path,
-                useMaterial3: widget.useMaterial3,
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          useMaterial3: widget.useMaterial3.value,
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1360),
+            child: ContainerLayout(
+              main: SingleChildScrollView(
+                controller: ScrollController(),
+                child: ApiDetail(
+                  name: widget.initialRoute,
+                  path: widget.path,
+                  useMaterial3: widget.useMaterial3,
+                ),
               ),
+              leftJudge: true,
+              asideLeft: isVertial ? null : menu,
+              asideLeftWidth: menuWidth.value,
             ),
-            leftJudge: true,
-            asideLeft: SingleChildScrollView(
-              controller: ScrollController(),
-              child: guideNew,
-            ),
-            asideLeftWidth: 200,
           ),
         ),
       ),
+    );
+  }
+
+  get menu {
+    return SingleChildScrollView(
+      controller: ScrollController(),
+      child: guideNew,
     );
   }
 }

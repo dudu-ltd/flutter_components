@@ -32,6 +32,7 @@ class _ApiDetailState extends State<ApiDetail>
   late ScrollController scrollCtrl;
   late Widget snap = Container();
   GlobalKey? lastKey;
+  late bool isVertial;
 
   @override
   dispose() {
@@ -137,13 +138,14 @@ class _ApiDetailState extends State<ApiDetail>
       children: List.generate(
           names.length,
           (index) => FractionallySizedBox(
-                widthFactor: .5,
+                widthFactor: isVertial ? 1 : .5,
                 child: widgetCodeBlockBuilder(names[index]),
               )),
     );
   }
 
   widgetsRowCodeBlockBuilder(name) {
+    if (isVertial) return widgetsCodeBlockBuilder(name);
     var names = name.toString().split(',');
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,6 +268,8 @@ class _ApiDetailState extends State<ApiDetail>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    Size size = MediaQuery.of(context).size;
+    isVertial = size.height > size.width;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
