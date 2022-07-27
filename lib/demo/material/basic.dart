@@ -829,7 +829,7 @@ registMaterialWidgetBasic(context) {
           trailing: Icon(Icons.arrow_forward_ios),
         ),
         child: Image.asset(
-          'image/wth.jpg',
+          'assets/image/wth.jpg',
           fit: BoxFit.cover,
         ),
       ),
@@ -846,7 +846,7 @@ registMaterialWidgetBasic(context) {
           trailing: Icon(Icons.arrow_forward_ios),
         ),
         child: Image.asset(
-          'image/wth.jpg',
+          'assets/image/wth.jpg',
           fit: BoxFit.cover,
         ),
       ),

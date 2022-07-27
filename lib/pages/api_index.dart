@@ -128,28 +128,32 @@ List<Map<String, dynamic>> get materialGuideData {
     {
       'id': 'quick_start',
       'text': '快速开始',
+      'useText': true,
       "children": [
-        {"id": "about", "text": "关于Flutter"},
-        {"id": "about_this", "text": "关于本站"},
+        {"id": "about", "text": "关于Flutter", 'useText': true},
+        {"id": "about_this", "text": "关于本站", 'useText': true},
       ]
     },
     {
       'id': 'layout',
       'text': '布局',
+      'useText': true,
       "children": [
         {"id": "Scaffold", "text": "脚手架布局"},
-        {"id": "show", "text": "功能性弹出层"},
+        {"id": "show", "text": "功能性弹出层", 'useText': true},
       ]
     },
     {
       'id': 'basic',
       'text': '基本使用',
+      'useText': true,
       "children": [
         {
           "id": "button",
           "text": "按钮",
+          'useText': true,
           "children": [
-            {"id": "all", "text": "按钮总览"},
+            {"id": "all", "text": "按钮总览", 'useText': true},
             {"id": "TextButton", "text": "文本按钮"},
             {"id": "ElevatedButton", "text": "浮层按钮"},
             {"id": "OutlinedButton", "text": "边框按钮"},
@@ -164,6 +168,7 @@ List<Map<String, dynamic>> get materialGuideData {
     {
       'id': 'display',
       'text': '数据展示',
+      'useText': true,
       "children": [
         {"id": "DataTable", "text": "表格"},
         {"id": "GridTile", "text": "类公众号文章卡片元素"},
@@ -177,6 +182,7 @@ List<Map<String, dynamic>> get materialGuideData {
     {
       'id': 'navigation',
       'text': '导航',
+      'useText': true,
       "children": [
         {"id": "NavigationBar", "text": "导航栏"},
         {"id": "NavigationRail", "text": "侧边导航"},
@@ -188,6 +194,7 @@ List<Map<String, dynamic>> get materialGuideData {
     {
       'id': 'feedback',
       'text': '反馈',
+      'useText': true,
       "children": [
         {"id": "SnackBar", "text": "横幅提示"},
         {"id": "Tooltip", "text": "鼠标提示语"},
@@ -196,6 +203,7 @@ List<Map<String, dynamic>> get materialGuideData {
     {
       'id': 'form',
       'text': '表单',
+      'useText': true,
       "children": [
         {"id": "Autocomplete", "text": "可搜索下拉"},
         {"id": "Checkbox", "text": "复选"},
@@ -234,29 +242,16 @@ class ApiPage extends StatefulWidget {
 class _ApiPageState extends State<ApiPage> with SingleTickerProviderStateMixin {
   BuildContext? navContext;
   Map<String, RoutePageBuilder> cache = {};
-  late AnimationController menuCtrl;
-  late Animation<double> menuWidth;
-  late bool menuShow = true;
   late bool isVertial;
-
-  @override
-  void initState() {
-    menuCtrl =
-        AnimationController(duration: Duration(milliseconds: 300), vsync: this);
-    menuWidth = Tween(begin: 200.0, end: 40.0).animate(menuCtrl)
-      ..addListener(() {
-        menuShow = menuWidth.value == 200.0;
-        setState(() {});
-      });
-    super.initState();
-  }
 
   Widget get guideNew {
     return Material(
       color: Colors.white,
-      child: Column(children: [
-        if (menuShow) ...guideDataToWidget(widget.guideData),
-      ]),
+      child: Column(
+        children: [
+          ...guideDataToWidget(widget.guideData),
+        ],
+      ),
     );
   }
 
@@ -305,7 +300,8 @@ class _ApiPageState extends State<ApiPage> with SingleTickerProviderStateMixin {
     var result = <Widget>[];
     for (var i = 0; i < data.length; i++) {
       var node = data[i];
-      var text = '${' ' * level}${node['text']}';
+      var text =
+          '${' ' * level}${node['useText'] ?? false ? node['text'] : node['id']}';
       if (node['children'] is List) {
         List<Widget> children = guideDataToWidget(
           node['children'],
@@ -333,7 +329,17 @@ class _ApiPageState extends State<ApiPage> with SingleTickerProviderStateMixin {
             onTap: () {
               to(node['text'], fileId(preId, node['id']));
             },
-            title: Text(text, style: const TextStyle(fontSize: 14)),
+            title: Tooltip(
+              message: text,
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 14,
+                  overflow: TextOverflow.clip,
+                ),
+                maxLines: 1,
+              ),
+            ),
             selected: widget.initialRoute == fileId(preId, node['id']),
           ),
         );
@@ -387,7 +393,7 @@ class _ApiPageState extends State<ApiPage> with SingleTickerProviderStateMixin {
               ),
               leftJudge: true,
               asideLeft: isVertial ? null : menu,
-              asideLeftWidth: menuWidth.value,
+              asideLeftWidth: 230,
             ),
           ),
         ),
