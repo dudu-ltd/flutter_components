@@ -6,9 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_components/demo/material/layout/show.demo.dart';
 
 import 'layout/Scaffold.demo.dart';
+import 'layout/LayoutDemo.demo.dart';
 
 registMaterialLayout(BuildContext context) {
   registScaffold(context);
+  registLayoutDemo(context);
   // registColumn(context);
   // registRow(context);
   registShow(context);

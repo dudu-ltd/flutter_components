@@ -139,6 +139,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'text': '布局',
       'useText': true,
       "children": [
+        {"id": "LayoutDemo", "text": "布局示例", 'useText': true},
         {"id": "Scaffold", "text": "脚手架布局"},
         {"id": "show", "text": "功能性弹出层", 'useText': true},
       ]
