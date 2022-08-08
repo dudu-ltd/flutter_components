@@ -17,6 +17,153 @@ class TestVSync implements TickerProvider {
 }
 
 registLayoutDemo(BuildContext context) {
+  /// layoutDemoRow
+  var blockArray = [
+    Container(
+      width: 20,
+      height: 20,
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: const Text('1'),
+    ),
+    Container(
+      width: 20,
+      height: 20,
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: const Text('2'),
+    ),
+    Container(
+      width: 20,
+      height: 20,
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: const Text('3'),
+    ),
+  ];
+  Map<String, MainAxisAlignment> map = {
+    "start": MainAxisAlignment.start,
+    "center": MainAxisAlignment.center,
+    "end": MainAxisAlignment.end,
+    "spaceAround": MainAxisAlignment.spaceAround,
+    "spaceEvenly": MainAxisAlignment.spaceEvenly,
+    "spaceBetween": MainAxisAlignment.spaceBetween,
+  };
+  var tipWidth = 110.0;
+  var contentWidth = 170.0;
+  var lineHeight = 30.0;
+  var rows = <Widget>[];
+  map.forEach((String key,MainAxisAlignment value) {
+    var row = Row(
+      children: [
+        SizedBox(
+          width: tipWidth,
+          height: lineHeight,
+          child: Text('$key:'),
+        ),
+        Container(
+          color: Colors.blueGrey,
+          width: contentWidth,
+          height: lineHeight,
+          child: Row(
+            mainAxisAlignment: value,
+            children: blockArray,
+          ),
+        )
+      ],
+    );
+    rows.add(row);
+  });
+  var layoutDemoRow = Demo(
+    'layoutDemoRow',
+    SizedBox(
+      height: 200,
+      width: 300,
+      child: DecoratedBox(
+          decoration: const BoxDecoration(color: Colors.blue),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: rows,
+            ),
+          )
+      )
+    ),
+    r'''
+    var blockArray = [
+      Container(
+        width: 20,
+        height: 20,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: const Text('1'),
+      ),
+      Container(
+        width: 20,
+        height: 20,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: const Text('2'),
+      ),
+      Container(
+        width: 20,
+        height: 20,
+        color: Colors.white,
+        alignment: Alignment.center,
+        child: const Text('3'),
+      ),
+    ];
+    Map<String, MainAxisAlignment> map = {
+      "start": MainAxisAlignment.start,
+      "center": MainAxisAlignment.center,
+      "end": MainAxisAlignment.end,
+      "spaceAround": MainAxisAlignment.spaceAround,
+      "spaceEvenly": MainAxisAlignment.spaceEvenly,
+      "spaceBetween": MainAxisAlignment.spaceBetween,
+    };
+    var tipWidth = 110.0;
+    var contentWidth = 170.0;
+    var lineHeight = 30.0;
+    var rows = <Widget>[];
+    map.forEach((String key,MainAxisAlignment value) {
+      var row = Row(
+        children: [
+          SizedBox(
+            width: tipWidth,
+            height: lineHeight,
+            child: Text('$key:'),
+          ),
+          Container(
+            color: Colors.blueGrey,
+            width: contentWidth,
+            height: lineHeight,
+            child: Row(
+              mainAxisAlignment: value,
+              children: blockArray,
+            ),
+          )
+        ],
+      );
+      rows.add(row);
+    });
+    
+    SizedBox(
+      height: 200,
+      width: 300,
+      child: DecoratedBox(
+          decoration: const BoxDecoration(color: Colors.blue),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: rows,
+            ),
+          )
+      )
+    ),
+    ''',
+    'layoutDemoRow',
+  );
+
   /// layoutDemo1
   var layoutDemo1 = Demo(
     'layoutDemo1',
@@ -95,7 +242,7 @@ registLayoutDemo(BuildContext context) {
     'layoutDemo1',
   );
 
-  //layoutDemo2
+  //layoutDemoWaterfall
   List<List<Map<String, String>>> list = [
     [
       {
@@ -183,8 +330,8 @@ registLayoutDemo(BuildContext context) {
     columns.add(expanded);
   }
 
-  var layoutDemo2 = Demo(
-    'layoutDemo2',
+  var layoutDemoWaterfall = Demo(
+    'layoutDemoWaterfall',
     SizedBox(
       width: 500,
       child: DecoratedBox(
