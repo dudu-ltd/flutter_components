@@ -3,7 +3,22 @@
 
 # Row属性：mainAxisAlignment
 ```widget
-layoutDemoRow
+layoutDemoRow1
+```
+
+# Row属性：crossAxisAlignment
+```widget
+layoutDemoRow2
+```
+
+# Column属性：mainAxisAlignment
+```widget
+layoutDemoColumn1
+```
+
+# Column属性：crossAxisAlignment
+```widget
+layoutDemoColumn2
 ```
 
 ```widget
