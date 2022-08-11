@@ -169,7 +169,7 @@ registRowColumn(BuildContext context) {
       )
     ),
     ''',
-    'rowDemo1',
+    'Row属性：mainAxisAlignment',
   );
 
   /// rowDemo2
@@ -299,7 +299,7 @@ registRowColumn(BuildContext context) {
         )
     ),
     ''',
-    'rowDemo2',
+    'Row属性：crossAxisAlignment',
   );
 
   ///columnDemo1
@@ -427,7 +427,7 @@ registRowColumn(BuildContext context) {
         )
     ),
     ''',
-    'columnDemo1',
+    'Column属性：mainAxisAlignment',
   );
 
   /// columnDemo2
@@ -547,6 +547,6 @@ registRowColumn(BuildContext context) {
         )
     ),
     ''',
-    'columnDemo2',
+    'Column属性：crossAxisAlignment',
   );
 }

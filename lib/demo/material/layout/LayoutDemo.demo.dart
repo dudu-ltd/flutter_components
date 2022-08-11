@@ -21,7 +21,7 @@ registLayoutDemo(BuildContext context) {
   var layoutDemo1 = Demo(
     'layoutDemo1',
     SizedBox(
-      height: 200,
+      height: 80,
       width: 200,
       child: DecoratedBox(
         decoration: const BoxDecoration(color: Colors.blue),
@@ -57,7 +57,7 @@ registLayoutDemo(BuildContext context) {
     ,),
     r'''
     SizedBox(
-      height: 200,
+      height: 50,
       width: 200,
       child: DecoratedBox(
         decoration: const BoxDecoration(color: Colors.blue),
@@ -92,7 +92,111 @@ registLayoutDemo(BuildContext context) {
       )
     ,),
     ''',
-    'layoutDemo1',
+    'Expanded用法',
+  );
+
+  const length = 10;
+  List<Widget> menuList = [];
+  for (var i = 0; i < length; i ++) {
+    var menu = ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        child: Container(
+          color: Colors.blueGrey,
+          width: 100,
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: const [
+              ClipOval( //剪裁为圆角矩形
+                child: Image(
+                  image: AssetImage("logo.png"),
+                  width: 45,
+                  height: 45,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  '菜单名称',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        )
+    );
+    menuList.add(menu);
+  }
+  var layoutDemo2 = Demo(
+    'layoutDemo2',
+    SizedBox(
+      height: 240,
+      width: 800,
+      child: DecoratedBox(
+          decoration: const BoxDecoration(color: Colors.blue),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              spacing: 10,
+              runSpacing: 10,
+              runAlignment: WrapAlignment.start,
+              children: menuList,
+            ),
+          )
+      )
+    ),
+    r'''
+    const length = 10;
+    List<Widget> menuList = [];
+    for (var i = 0; i < length; i ++) {
+      var menu = ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          child: Container(
+            color: Colors.blueGrey,
+            width: 100,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: const [
+                ClipOval( //剪裁为圆角矩形
+                  child: Image(
+                    image: AssetImage("logo.png"),
+                    width: 45,
+                    height: 45,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    '菜单名称',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
+              ],
+            ),
+          )
+      );
+      menuList.add(menu);
+    }
+    
+    SizedBox(
+      height: 240,
+      width: 800,
+      child: DecoratedBox(
+          decoration: const BoxDecoration(color: Colors.blue),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              spacing: 10,
+              runSpacing: 10,
+              runAlignment: WrapAlignment.start,
+              children: menuList,
+            ),
+          )
+      )
+    ),
+    ''',
+    '流式布局',
   );
 
   //layoutDemoWaterfall
