@@ -8,6 +8,10 @@ layoutDemo1
 layoutDemo2
 ```
 
+```widget
+layoutDemo3
+```
+
 # 瀑布流
 ```widget
 layoutDemoWaterfall

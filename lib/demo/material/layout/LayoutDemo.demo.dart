@@ -199,6 +199,118 @@ registLayoutDemo(BuildContext context) {
     '流式布局',
   );
 
+  var layoutDemo3 = Demo(
+    'layoutDemo3',
+    SizedBox(
+        height: 240,
+        width: 800,
+        child: DecoratedBox(
+            decoration: const BoxDecoration(color: Colors.blue),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            style: TextStyle(color: Colors.white),
+                            "this is a line"
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            style: TextStyle(color: Colors.white),
+                            "this is a line"
+                        ),
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    right: 30,
+                    bottom: 30,
+                    width: 60,
+                    height: 60,
+                    child: ClipOval(
+                      child: Container(
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                            "回到\n首页"
+                        ),
+                      ),
+                    )
+                  ),
+                ],
+              ),
+            )
+        )
+    ),
+    r'''
+    SizedBox(
+        height: 240,
+        width: 800,
+        child: DecoratedBox(
+            decoration: const BoxDecoration(color: Colors.blue),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            style: TextStyle(color: Colors.white),
+                            "this is a line"
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            style: TextStyle(color: Colors.white),
+                            "this is a line"
+                        ),
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    right: 30,
+                    bottom: 30,
+                    width: 60,
+                    height: 60,
+                    child: ClipOval(
+                      child: Container(
+                        color: Colors.blueGrey,
+                        padding: const EdgeInsets.all(10),
+                        child: const Text(
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                            "回到\n首页"
+                        ),
+                      ),
+                    )
+                  ),
+                ],
+              ),
+            )
+        )
+    ),
+    ''',
+    '层叠布局',
+  );
+
+
   //layoutDemoWaterfall
   List<List<Map<String, String>>> list = [
     [
