@@ -518,6 +518,6 @@ registLayoutDemo(BuildContext context) {
       )
     ),
     ''',
-    'layoutDemo1',
+    '瀑布流',
   );
 }

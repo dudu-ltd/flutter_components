@@ -8,10 +8,13 @@ import 'material/basic.dart';
 import 'material/button.dart';
 import 'material/display.dart';
 import 'material/layout.dart';
+import 'material/basic/Container.demo.dart';
 
 registMaterial(context) {
   registMaterialButton(context);
   registMaterialWidgetBasic(context);
   registMaterialDisplay(context);
   registMaterialLayout(context);
+
+  registContainerDemo(context);
 }
