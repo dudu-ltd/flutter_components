@@ -150,6 +150,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'text': '基本使用',
       'useText': true,
       "children": [
+        {"id": "Container", "text": "容器类", 'useText': true},
         {
           "id": "button",
           "text": "按钮",
@@ -165,7 +166,6 @@ List<Map<String, dynamic>> get materialGuideData {
             {"id": "FloatingActionButton", "text": "圆型按钮"},
           ]
         },
-        {"id": "Container", "text": "容器类", 'useText': true},
       ]
     },
     {
