@@ -89,7 +89,8 @@ flutter:
     - assets/md/material/layout/Scaffold.md
     - assets/md/material/layout/show.md
 
-    # 容器
+    # 基本
+    - assets/md/material/basic/Text.md
     - assets/md/material/basic/Container.md
     # 按钮
     - assets/md/material/basic/button/all.md

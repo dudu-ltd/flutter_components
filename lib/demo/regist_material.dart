@@ -8,6 +8,8 @@ import 'material/basic.dart';
 import 'material/button.dart';
 import 'material/display.dart';
 import 'material/layout.dart';
+
+import 'material/basic/Text.demo.dart';
 import 'material/basic/Container.demo.dart';
 
 registMaterial(context) {
@@ -16,5 +18,6 @@ registMaterial(context) {
   registMaterialDisplay(context);
   registMaterialLayout(context);
 
+  registTextDemo(context);
   registContainerDemo(context);
 }
