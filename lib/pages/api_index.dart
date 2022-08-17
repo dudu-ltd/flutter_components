@@ -151,6 +151,7 @@ List<Map<String, dynamic>> get materialGuideData {
       'useText': true,
       "children": [
         {"id": "Text", "text": "文本", 'useText': true},
+        {"id": "Image", "text": "图片", 'useText': true},
         {"id": "Container", "text": "容器类", 'useText': true},
         {
           "id": "button",

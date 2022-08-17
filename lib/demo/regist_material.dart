@@ -10,6 +10,7 @@ import 'material/display.dart';
 import 'material/layout.dart';
 
 import 'material/basic/Text.demo.dart';
+import 'material/basic/Image.demo.dart';
 import 'material/basic/Container.demo.dart';
 
 registMaterial(context) {
@@ -19,5 +20,6 @@ registMaterial(context) {
   registMaterialLayout(context);
 
   registTextDemo(context);
+  registImageDemo(context);
   registContainerDemo(context);
 }

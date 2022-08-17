@@ -72,6 +72,9 @@ flutter:
     - assets/data/search/history.json
     - assets/data/search/result.json
 
+    # icon
+    - assets/iconfont.ttf
+
     # image
     - assets/image/htw.jpg
     - assets/image/wth.jpg
@@ -91,6 +94,7 @@ flutter:
 
     # 基本
     - assets/md/material/basic/Text.md
+    - assets/md/material/basic/Image.md
     - assets/md/material/basic/Container.md
     # 按钮
     - assets/md/material/basic/button/all.md
@@ -164,3 +168,6 @@ flutter:
       fonts:
         - asset: assets/fonts/PingFang.ttf
           weight: 600
+    - family: myIcon  #指定一个字体名
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
