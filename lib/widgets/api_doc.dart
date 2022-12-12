@@ -77,6 +77,7 @@ class _ApiDetailState extends State<ApiDetail>
                       'widgets': widgetsCodeBlockBuilder,
                       'widgetsRow': widgetsRowCodeBlockBuilder,
                       'properties': propertiesBuilder,
+                      'withCodeWidget': withCodeWidgetBuilder,
                     },
                   ),
                 ),
@@ -124,6 +125,10 @@ class _ApiDetailState extends State<ApiDetail>
         color: (Theme.of(context).primaryColor as MaterialColor).shade50,
       ),
     );
+  }
+
+  withCodeWidgetBuilder(name) {
+    return demos[name]!.widget;
   }
 
   // MdTheme get mdTheme {

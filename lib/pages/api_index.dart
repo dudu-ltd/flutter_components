@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/pages/header.dart';
 import 'package:flutter_components/widgets/container_layout.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/api_doc.dart';
 
@@ -109,11 +110,18 @@ class _IndexPageState extends State<IndexPage>
                 : Theme.of(context).disabledColor,
           ),
         ),
-        bottomNavigationBar: const SizedBox(
+        bottomNavigationBar: SizedBox(
           height: 30,
           child: Center(
-            child: Text(
-              'Copyright © 2022-present, 闽ICP备2022010380号-1',
+            child: InkWell(
+              onTap: () => launchUrl(Uri(
+                scheme: 'https',
+                host: 'beian.miit.gov.cn',
+                path: '',
+              )),
+              child: const Text(
+                'Copyright © 2022-present, 闽ICP备2022010380号-1',
+              ),
             ),
           ),
         ),

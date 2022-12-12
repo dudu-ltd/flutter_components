@@ -73,12 +73,13 @@ flutter:
     - assets/data/search/result.json
 
     # icon
-    - assets/iconfont.ttf
+    - assets/fonts/iconfont.ttf
 
     # image
+    - assets/image/wx_group.jpg
     - assets/image/htw.jpg
     - assets/image/wth.jpg
-    - logo.png
+    - assets/logo.png
     - assets/dart_syntax.json
     # doc
     #================= Material md ================

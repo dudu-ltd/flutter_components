@@ -5,4 +5,11 @@
 - 与Flutter开发者们，共同成长。
 
 ## 交流群
-- QQ群：702522120
+### QQ群
+```withCodeWidget
+qqGroup
+```
+### 微信群
+```withCodeWidget
+wxGroup
+```

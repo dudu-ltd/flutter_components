@@ -12,6 +12,7 @@ import 'material/layout.dart';
 import 'material/basic/Text.demo.dart';
 import 'material/basic/Image.demo.dart';
 import 'material/basic/Container.demo.dart';
+import 'material/others.dart';
 
 registMaterial(context) {
   registMaterialButton(context);
@@ -22,4 +23,6 @@ registMaterial(context) {
   registTextDemo(context);
   registImageDemo(context);
   registContainerDemo(context);
+
+  registOthers(context);
 }
