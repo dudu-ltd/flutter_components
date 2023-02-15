@@ -33,14 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  catex:
-    dependency: transitive
-    description:
-      name: catex
-      sha256: "0cc66bb0c9b8a745b10c88dbf1a04b46e70c6441ac839fca699afea33526d38d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1+8"
   characters:
     dependency: transitive
     description:
@@ -136,7 +128,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bad4c9dbc060756d46f1363d28d17b21bee02dd0
+      resolved-ref: ab3747d000103178cadccd589459e35afaea8f44
       url: "https://github.com/CorvusYe/flutter_markdown"
     source: git
     version: "0.6.1"
@@ -516,5 +508,5 @@ packages:
     source: hosted
     version: "5.4.1"
 sdks:
-  dart: ">=2.19.0 <3.0.0"
+  dart: ">=2.19.0 <4.0.0"
   flutter: ">=3.3.0"
