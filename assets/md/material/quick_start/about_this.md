@@ -13,3 +13,6 @@ qqGroup
 ```withCodeWidget
 wxGroup
 ```
+
+## 致谢
+- chinese_font_library作者：[LastMonopoly](https://github.com/LastMonopoly/chinese_font_library)
