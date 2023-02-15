@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:convert';
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart' as md;
@@ -104,12 +105,12 @@ class _ApiDetailState extends State<ApiDetail>
         4: FixedColumnWidth(64),
       },
       h1Align: WrapAlignment.end,
-      h1: const TextStyle(fontSize: 26, height: 1.8),
-      h2: const TextStyle(fontSize: 24, height: 1.7),
-      h3: const TextStyle(fontSize: 22, height: 1.6),
-      h4: const TextStyle(fontSize: 20, height: 1.5),
-      h5: const TextStyle(fontSize: 18, height: 1.4),
-      h6: const TextStyle(fontSize: 16, height: 1.3),
+      h1: const TextStyle(fontSize: 26, height: 1.8).useSystemChineseFont(),
+      h2: const TextStyle(fontSize: 24, height: 1.7).useSystemChineseFont(),
+      h3: const TextStyle(fontSize: 22, height: 1.6).useSystemChineseFont(),
+      h4: const TextStyle(fontSize: 20, height: 1.5).useSystemChineseFont(),
+      h5: const TextStyle(fontSize: 18, height: 1.4).useSystemChineseFont(),
+      h6: const TextStyle(fontSize: 16, height: 1.3).useSystemChineseFont(),
       textAlign: WrapAlignment.start,
       code: const TextStyle(
           color: Colors.blue,

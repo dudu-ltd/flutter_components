@@ -7,3 +7,7 @@
 - 第三方包仓库：[pub.dev](https://pub.flutter-io.cn/)
 - GitHub：[flutter / flutter](https://github.com/flutter/flutter)
 - Gitee：[Gitee 极速下载 / Flutter](https://gitee.com/mirrors/Flutter)
+- 中国Flutter用户小组@GitHub：[CFUG](https://github.com/cfug)
+
+## 致谢
+- chinese_font_library作者：[LastMonopoly](https://github.com/LastMonopoly/chinese_font_library)

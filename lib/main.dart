@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/pages/api_index.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:chinese_font_library/chinese_font_library.dart';
 
 import 'third_party/syntax_highlight.dart';
 
@@ -30,8 +31,9 @@ class FlutterComponents extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter组件们',
       theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.useSystemChineseFont(),
         // useMaterial3: true,
-        fontFamily: 'PingFang',
+        // fontFamily: 'PingFang',
         primarySwatch: Colors.blue,
       ),
 
