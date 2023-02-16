@@ -15,4 +15,6 @@ wxGroup
 ```
 
 ## 致谢
-- chinese_font_library作者：[LastMonopoly](https://github.com/LastMonopoly/chinese_font_library)
+- [LastMonopoly@GitHub](https://github.com/LastMonopoly/chinese_font_library): 提供中文字体优化方案 [chinese_font_library](https://pub.flutter-io.cn/packages/chinese_font_library)
+- [卢国祥@Gitee](https://gitee.com/noob-coder): 提供站点访问性能优化方案
+- [chenglu@GitHub](https://github.com/chenglu): 提供[资源CDN](https://github.com/cfug/files.flutter-io.cn)

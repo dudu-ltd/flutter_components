@@ -42849,7 +42849,7 @@ var $async$yc=A.ax(function(a5,a6){if(a5===1){o=a6
 s=p}while(true)switch(s){case 0:a2=null
 p=4
 s=7
-return A.aL(a4.hB(0,"FontManifest.json"),$async$yc)
+return A.aL(a4.hB(0,"https://files.flutter-io.cn/projects/flutter_components/landing/FontManifest.json"),$async$yc)
 case 7:a2=a6
 p=2
 s=6
