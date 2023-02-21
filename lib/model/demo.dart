@@ -11,8 +11,10 @@ class Demo {
   Widget widget;
   String code;
   String? title;
-  Demo(this.name, this.widget, this.code, [this.title]) {
+  bool expanded = false;
+  Demo(this.name, this.widget, this.code, [this.title, bool? expanded]) {
     if (demos.containsKey(name)) throw Exception("重复注册 demo, 名称为：$name");
     demos[name] = this;
+    this.expanded = expanded ?? code.trim().split('\n').length <= 12;
   }
 }

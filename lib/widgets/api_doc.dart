@@ -237,7 +237,14 @@ class _ApiDetailState extends State<ApiDetail>
                 Border.fromBorderSide(BorderSide(color: Colors.grey.shade300)),
                 false,
               ),
-              code(demo.code.trimRight()),
+              ExpansionTile(
+                title: const Text("展开丨收起代码"),
+                initiallyExpanded: demo.expanded,
+                expandedAlignment: Alignment.center,
+                children: [
+                  code(demo.code.trimRight()),
+                ],
+              ),
             ],
           ),
         ),
